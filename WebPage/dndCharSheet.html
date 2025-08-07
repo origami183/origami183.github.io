@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>D&D sheet - origami183</title>
+  <link rel="stylesheet" href="css/charSheetStyles.css">
+  <script src="js/charSheet.js" type="module"></script>
+</head>
+
+<body>
+  <header class="navbar">
+    <div id="page navigation">
+      <p>D&D 5e/2024 Charcter Sheet</p>
+      <a href="index.html">Go to main page</a>
+    </div>
+    <div id="char-sheet-util">
+      <select id="saved-sheets-dropdown">
+        <option value="">-- Select Saved Sheet --</option>
+      </select>
+      <button id="save-btn">Save</button>
+      <button id="export-btn">Export</button>
+      <button id="import-btn">Import</button>
+      <input type="file" id="import-file" style="display: none;" accept=".json">
+      <button id="reset-btn">New Sheet</button>
+      <button id="delete-btn">Delete</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="basic_info">
+      <p>Name: <input type="text" id="name"/></p>
+      <p>Level: <input type="number" id="LVL"/></p>
+      <p>Class: <input type="text" id="class"/></p>
+      <p>Background: <input type="text" id="background"/></p>
+      <p>Race/Species: <input type="text" id="race"/></p>
+      <p>Alignment: <input type="text" id="alignment"/></p>
+    </div>
+
+    <div id="non-attribute_stats">
+      <p>Proficiency: +<span id="Profic">0</span></p>
+      <p>HP: <input type="number" id="hpCur"/> / <input type="number" id="hpMax"/></p>
+      <p>Temp HP: <input type="text" id="hpTemp"/></p>
+      <p>Hit Dice: <input type="number" id="hDiceCur"/> / <input type="number" id="hDiceMax"/></p>
+      <p>Armor Class: <input type="text" id="AC"/></p>
+      <p>Initiative: <input type="text" id="initiative"/></p>
+      <p>Passive Perception: <span id="passivePerc">0</span></p>
+      <section id="death_box">
+        <p>Death Saves:</p>
+        <div>
+          <p>Pass:<input type="checkbox" id="dPass1"/><input type="checkbox" id="dPass2"/><input type="checkbox" id="dPass3"/></p>
+          <p>Fail:<input type="checkbox" id="dFail1"/><input type="checkbox" id="dFail2"/><input type="checkbox" id="dFail3"/></p>
+        </div>
+      </section>
+      <section id="speed_box">
+        <p>Speed:</p>
+        <div id="move_speed">
+          <p>Walking:<input type="text" id="walkSpeed"/></p>
+          <p>Flying:<input type="text" id="flySpeed"/></p>
+          <p>Swimming:<input type="text" id="swimSpeed"/></p>
+          <p>Climbing:<input type="text" id="climbSpeed"/></p>
+        </div>
+      </section>
+    </div>
+
+    <div id="output-box">
+      <table id="stats">
+        <tr>
+            <th><input type="number" id="STR"/></th>
+            <th><input type="number" id="DEX"/></th>
+            <th><input type="number" id="CON"/></th>
+            <th><input type="number" id="INT"/></th>
+            <th><input type="number" id="WIS"/></th>
+            <th><input type="number" id="CHA"/></th>
+        </tr>
+        <tr>
+            <td><strong>Strength</strong></td>
+            <td><strong>Dexterity</strong></td>
+            <td><strong>Constitution</strong></td>
+            <td><strong>Intelligence</strong></td>
+            <td><strong>Wisdom</strong></td>
+            <td><strong>Charisma</strong></td>
+        </tr>
+        <tr>
+            <td>Modifier: <span id="StrMod">0</span></td>
+            <td>Modifier: <span id="DexMod">0</span></td>
+            <td>Modifier: <span id="ConMod">0</span></td>
+            <td>Modifier: <span id="IntMod">0</span></td>
+            <td>Modifier: <span id="WisMod">0</span></td>
+            <td>Modifier: <span id="ChaMod">0</span></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" title="Prof." id="StrProf"/>Strength Save: <span id="StrSave">0</span></td>
+            <td><input type="checkbox" title="Prof." id="DexProf"/>Dexterity Save: <span id="DexSave">0</span></td>
+            <td><input type="checkbox" title="Prof." id="ConProf"/>Constitution Save: <span id="ConSave">0</span></td>
+            <td><input type="checkbox" title="Prof." id="IntProf"/>Intelligence Save: <span id="IntSave">0</span></td>
+            <td><input type="checkbox" title="Prof." id="WisProf"/>Wisdom Save: <span id="WisSave">0</span></td>
+            <td><input type="checkbox" title="Prof." id="ChaProf"/>Charisma Save: <span id="ChaSave">0</span></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" title="Prof." id="AthProf"/><input type="checkbox" title="Exp." id="AthExp"/>Athletics: <span id="Athlet">0</span></td>
+            <td><input type="checkbox" title="Prof." id="AcrProf"/><input type="checkbox" title="Exp." id="AcrExp"/>Acrobatics: <span id="Acro">0</span></td>
+            <td></td>
+            <td><input type="checkbox" title="Prof." id="ArcProf"/><input type="checkbox" title="Exp." id="ArcExp"/>Arcana: <span id="Arcan">0</span></td>
+            <td><input type="checkbox" title="Prof." id="AniProf"/><input type="checkbox" title="Exp." id="AniExp"/>Animal Handling: <span id="AniHand">0</span></td>
+            <td><input type="checkbox" title="Prof." id="DecProf"/><input type="checkbox" title="Exp." id="DecExp"/>Deception: <span id="Decept">0</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox" title="Prof." id="SoHProf"/><input type="checkbox" title="Exp." id="SoHExp"/>Slight of Hand: <span id="Slight">0</span></td>
+            <td></td>
+            <td><input type="checkbox" title="Prof." id="HisProf"/><input type="checkbox" title="Exp." id="HisExp"/>History: <span id="Hist">0</span></td>
+            <td><input type="checkbox" title="Prof." id="InsProf"/><input type="checkbox" title="Exp." id="InsExp"/>Insight: <span id="Ins">0</span></td>
+            <td><input type="checkbox" title="Prof." id="InProf"/><input type="checkbox" title="Exp." id="InExp"/>Intimidation: <span id="Intimi">0</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox" title="Prof." id="SteProf"/><input type="checkbox" title="Exp." id="SteExp"/>Stealth: <span id="Stealth">0</span></td>
+            <td></td>
+            <td><input type="checkbox" title="Prof." id="InvProf"/><input type="checkbox" title="Exp." id="InvExp"/>Investigation: <span id="Invest">0</span></td>
+            <td><input type="checkbox" title="Prof." id="MedProf"/><input type="checkbox" title="Exp." id="MedExp"/>Medicine: <span id="Med">0</span></td>
+            <td><input type="checkbox" title="Prof." id="PerfProf"/><input type="checkbox" title="Exp." id="PerfExp"/>Performance: <span id="Perform">0</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input type="checkbox" title="Prof." id="NatProf"/><input type="checkbox" title="Exp." id="NatExp"/>Nature: <span id="Nat">0</span></td>
+            <td><input type="checkbox" title="Prof." id="PercProf"/><input type="checkbox" title="Exp." id="PercExp"/>Perception: <span id="Per">0</span></td>
+            <td><input type="checkbox" title="Prof." id="PersProf"/><input type="checkbox" title="Exp." id="PersExp"/>Persuasion: <span id="Pers">0</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input type="checkbox" title="Prof." id="RelProf"/><input type="checkbox" title="Exp." id="RelExp"/>Religion: <span id="Rel">0</span></td>
+            <td><input type="checkbox" title="Prof." id="SurProf"/><input type="checkbox" title="Exp." id="SurExp"/>Survival: <span id="Sur">0</span></td>
+            <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="Feat-Prof-Equip">
+      <div class="Features">
+        <p>Features: </p>
+        <textarea id="featuresText"></textarea>
+      </div>
+      <div class="Proficiencies">
+        <p>Proficiencies: </p>
+        <textarea id="proficienciesText"></textarea>
+      </div>
+      <div class="Equipment">
+        <p>Equipment: </p>
+        <textarea id="equipmentText"></textarea>
+      </div>
+    </div>
+
+    <div id="money">
+      <p><strong>Funds</strong></p>
+      <div id="money-box">
+        <div><label>CP:</label><input type="number" id="copper"/></div>
+        <div><label>SP:</label><input type="number" id="silver"/></div>
+        <div><label>GP:</label><input type="number" id="gold"/></div>
+        <div><label>PP:</label><input type="number" id="platinum"/></div>
+      </div>
+    </div>
+
+    <div id="combat">
+      <p><strong>Weapons & Attacks</strong></p>
+      <div id="weapons">
+        <table id="weapon-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Attack</th>
+              <th>Damage</th>
+              <th>Mastery?</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" class="first-col" id="weaponName"></td>
+              <td><input type="text" id="weaponAttack"></td>
+              <td><input type="text" id="weaponDamage"></td>
+              <td><input type="checkbox" id="weaponMastery"></td>
+              <td><input type="text" class="last-col" id="weaponNotes"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Spells & Magic</strong></p>
+      <div id="magic">
+        <div id="spell-info">
+          <label>Spell Ability:</label><input type="text" id="spellAbil"/>
+          <label>Spell Save DC:</label><input type="number" id="spellDC"/>
+          <label>Spell Attack Bonus:</label><input type="number" id="spellAttack"/>
+        </div>
+        <div id="slots">
+          <h4>Spell Slots</h3>
+          <p>1st <input type="number" id="1stCur"> / <input type="number" id="1stMax" data-level="1"></p>
+          <p>2nd <input type="number" id="2ndCur"> / <input type="number" id="2ndMax" data-level="2"></p>
+          <p>3rd <input type="number" id="3rdCur"> / <input type="number" id="3rdMax" data-level="3"></p>
+          <p>4th <input type="number" id="4thCur"> / <input type="number" id="4thMax" data-level="4"></p>
+          <p>5th <input type="number" id="5thCur"> / <input type="number" id="5thMax" data-level="5"></p>
+          <p>6th <input type="number" id="6thCur"> / <input type="number" id="6thMax" data-level="6"></p>
+          <p>7th <input type="number" id="7thCur"> / <input type="number" id="7thMax" data-level="7"></p>
+          <p>8th <input type="number" id="8thCur"> / <input type="number" id="8thMax" data-level="8"></p>
+          <p>9th <input type="number" id="9thCur"> / <input type="number" id="9thMax" data-level="9"></p>
+        </div>
+        <div id="spells">
+          <div class="spell-section" id="cantrips-section">
+            <h4>Cantrips</h3>
+            <table>
+              <tbody id="cantrips-body">
+                <tr>
+                  <td><input type="text" class="spell-name first-column last-column"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

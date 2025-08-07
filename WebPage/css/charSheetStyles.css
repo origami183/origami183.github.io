@@ -1,0 +1,181 @@
+body {
+  background: rgb(255, 255, 255);
+  font: serif;
+}
+
+header {
+  font-family: sans-serif;
+  color: #f2f2f2;
+  
+  p {
+    font-weight: bold;
+    font-size: large;
+    margin: 2vh 2vw;
+  }
+  a {
+    font-size: smaller;
+    color: #f2f2f2;
+    text-decoration: none;
+    margin: 2vh 2vw;
+  }
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  button {
+    margin-left: 2vw;
+  }
+  select {
+    margin-left: 2vw;
+  }
+}
+
+main {
+  margin-top: 75px;
+
+  #stats tr td {
+      text-align: center;
+      padding-right: 8vw;
+      padding-top: 1vh;
+      font-size: medium;
+  }
+
+  #stats tr input[type="checkbox"] {
+    margin-top: 0;
+  }
+
+  strong {
+    font-size: larger;
+  }
+
+  #stats tr {
+    margin-bottom: 0;
+    margin-top: 1vh;
+  }
+
+  #stats tr th {
+    padding-right: 8vw;
+  }
+
+  #basic_info,
+  #non-attribute_stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  #move_speed {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #death_box, #speed_box {
+    border: black solid;
+    margin: 1%;
+    padding-left: 1vw;
+    padding-right: 0;
+
+    p {
+      margin-top: 1vh;
+      margin-bottom: 1vh;
+    }
+
+    input[type="text"] {
+      margin-left: 1vw;
+    }
+  }
+
+  #non-attribute_stats {
+    input[type="number"] {
+      width: 20px;
+      height: 10px;
+      font-size: 16px;
+      padding: 5px;
+      text-align: center;
+    }
+  }
+
+  #basic_info p,
+  #non-attribute_stats p {
+    padding-right: 4vw;
+  }
+
+  input[type="number"] {
+    appearance: none;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: 75px;
+    height: 10px;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+      appearance:textfield;
+  }
+
+  #output-box {
+      margin-top: 20px;
+      font-size: 20px;
+  }
+
+  textarea {
+    field-sizing: content;
+  }
+
+  #Feat-Prof-Equip {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      p {
+        margin-bottom: 1vh;
+      }
+    }
+
+    textarea {
+      width: 25vw;
+    }
+  }
+
+  #money {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #money-box {
+    display: flex;
+    justify-content: space-between;
+    width: 66%;
+    gap: 1rem;
+  }
+
+  #money-box div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
