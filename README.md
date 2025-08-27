@@ -1,7 +1,7 @@
 While the main page acts mostly as a way to access any web app(s) I publish, the main one is my D&D Character Sheet App.
 Each app will receive a dedicated section within this file.
 
-# H1 Character Sheet:
+# Character Sheet:
 This page functions as a way to create and store Character Sheets for Dungeons & Dragons 5th & 2024 Editions.
 Main Features include: saving sheets to local storage, export/import functionality via JSON files, & dark mode toggle.
 
