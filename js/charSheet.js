@@ -754,9 +754,21 @@ deleteBtn.addEventListener('click', () => {
   }
 });
 
+const darkClass = 'dark-mode';
+
 window.addEventListener('DOMContentLoaded', () => {
   updateDropdown();
   updateDeleteButton();
   updateValues();
+
+  if (localStorage.getItem('dark-mode') === 'true') {
+  document.body.classList.add(darkClass);
+}
 });
 
+const toggle = document.getElementById('dark-mode');
+
+toggle.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle(darkClass);
+  localStorage.setItem('dark-mode', isDark);
+});

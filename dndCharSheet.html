@@ -24,6 +24,7 @@
       <input type="file" id="import-file" style="display: none;" accept=".json">
       <button id="reset-btn">New Sheet</button>
       <button id="delete-btn">Delete</button>
+      <button id="dark-mode">Toggle Dark Mode</button>
     </div>
   </header>
 
@@ -168,49 +169,54 @@
     </div>
 
     <div id="combat">
-      <p><strong>Weapons & Attacks</strong></p>
-      <div id="weapons">
-        <table id="weapon-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Attack</th>
-              <th>Damage</th>
-              <th>Mastery?</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="text" class="first-col" id="weaponName"></td>
-              <td><input type="text" id="weaponAttack"></td>
-              <td><input type="text" id="weaponDamage"></td>
-              <td><input type="checkbox" id="weaponMastery"></td>
-              <td><input type="text" class="last-col" id="weaponNotes"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p><strong>Spells & Magic</strong></p>
-      <div id="magic">
-        <div id="spell-info">
-          <label>Spell Ability:</label><input type="text" id="spellAbil"/>
-          <label>Spell Save DC:</label><input type="number" id="spellDC"/>
-          <label>Spell Attack Bonus:</label><input type="number" id="spellAttack"/>
+      <div id="top-row">
+        <div id="weapons">
+          <p><strong>Weapons & Attacks</strong></p>
+          <table id="weapon-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Attack</th>
+                <th>Damage</th>
+                <th>Mastery?</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" class="first-col" id="weaponName"></td>
+                <td><input type="text" id="weaponAttack"></td>
+                <td><input type="text" id="weaponDamage"></td>
+                <td><input type="checkbox" id="weaponMastery"></td>
+                <td><input type="text" class="last-col" id="weaponNotes"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <div id="spell-info">
+          <p><strong>Spells & Magic</strong></p>
+          <div id="spell-info-boxes">
+            <label>Spell Ability:</label><input type="text" id="spellAbil"/>
+            <label>Spell Save DC:</label><input type="number" id="spellDC"/>
+            <label>Spell Attack Bonus:</label><input type="number" id="spellAttack"/>
+          </div>
+        </div>
+      </div>
+      
+      <div id="bottom-row">
         <div id="slots">
           <h4>Spell Slots</h3>
-          <p>1st <input type="number" id="1stCur"> / <input type="number" id="1stMax" data-level="1"></p>
-          <p>2nd <input type="number" id="2ndCur"> / <input type="number" id="2ndMax" data-level="2"></p>
-          <p>3rd <input type="number" id="3rdCur"> / <input type="number" id="3rdMax" data-level="3"></p>
-          <p>4th <input type="number" id="4thCur"> / <input type="number" id="4thMax" data-level="4"></p>
-          <p>5th <input type="number" id="5thCur"> / <input type="number" id="5thMax" data-level="5"></p>
-          <p>6th <input type="number" id="6thCur"> / <input type="number" id="6thMax" data-level="6"></p>
-          <p>7th <input type="number" id="7thCur"> / <input type="number" id="7thMax" data-level="7"></p>
-          <p>8th <input type="number" id="8thCur"> / <input type="number" id="8thMax" data-level="8"></p>
-          <p>9th <input type="number" id="9thCur"> / <input type="number" id="9thMax" data-level="9"></p>
+          <p>1st <input type="number" class="slot-box" id="1stCur"> / <input type="number" class="slot-box" id="1stMax" data-level="1"></p>
+          <p>2nd <input type="number" class="slot-box" id="2ndCur"> / <input type="number" class="slot-box" id="2ndMax" data-level="2"></p>
+          <p>3rd <input type="number" class="slot-box" id="3rdCur"> / <input type="number" class="slot-box" id="3rdMax" data-level="3"></p>
+          <p>4th <input type="number" class="slot-box" id="4thCur"> / <input type="number" class="slot-box" id="4thMax" data-level="4"></p>
+          <p>5th <input type="number" class="slot-box" id="5thCur"> / <input type="number" class="slot-box" id="5thMax" data-level="5"></p>
+          <p>6th <input type="number" class="slot-box" id="6thCur"> / <input type="number" class="slot-box" id="6thMax" data-level="6"></p>
+          <p>7th <input type="number" class="slot-box" id="7thCur"> / <input type="number" class="slot-box" id="7thMax" data-level="7"></p>
+          <p>8th <input type="number" class="slot-box" id="8thCur"> / <input type="number" class="slot-box" id="8thMax" data-level="8"></p>
+          <p>9th <input type="number" class="slot-box" id="9thCur"> / <input type="number" class="slot-box" id="9thMax" data-level="9"></p>
         </div>
+        
         <div id="spells">
           <div class="spell-section" id="cantrips-section">
             <h4>Cantrips</h3>
@@ -224,6 +230,7 @@
           </div>
         </div>
       </div>
+      
     </div>
   </main>
 </body>
