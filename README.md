@@ -15,7 +15,7 @@ How to use:
 - Export downloads the currently selected sheet as a JSON file.
 - Import allows the upload of a single JSON file to (should only accept valid sheet files).
 - New Sheet resets all values back to defaults (clear all button, be sure to save anything important).
-- Delete deletes a sheet saved to local storage.
+- Delete allows deleting any sheet saved to local storage
 - Toggle Dark Mode swaps the page between light & dark mode.
 
 ---
