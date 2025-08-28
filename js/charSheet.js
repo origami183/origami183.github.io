@@ -662,6 +662,7 @@ function clearData() {
 
 // Button Event Listeners
 
+// save button - save all current fields
 saveBtn.addEventListener('click', () => {
   const name = prompt('Enter a name for this sheet:', currentSheetName || '');
   if (!name) return;
@@ -670,6 +671,7 @@ saveBtn.addEventListener('click', () => {
   alert(`Saved "${name}" to localStorage.`);
 });
 
+// export button - export current fields to JSON file
 exportBtn.addEventListener('click', () => {
   const data = collectData();
   const filename = (currentSheetName || 'character-sheet') + '.json';
@@ -682,10 +684,12 @@ exportBtn.addEventListener('click', () => {
   URL.revokeObjectURL(url);
 });
 
+// import button - import data to fields/sheet from JSON file
 importBtn.addEventListener('click', () => {
   importFile.click();
 });
 
+// helper for import - actually handle file upload
 importFile.addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -707,15 +711,17 @@ importFile.addEventListener('change', (e) => {
   reader.readAsText(file);
 });
 
+// disables delete button if sheet is unnamed
 function updateDeleteButton() {
   deleteBtn.disabled = !currentSheetName;
 }
 
+// sheet selector updater
 dropdown.addEventListener('change', () => {
   const name = dropdown.value;
   if (!name) {
     currentSheetName = '';
-    clearData();  // Or whatever makes sense on "no selection"
+    clearData();
   } else {
     const all = getSavedSheets();
     const data = all[name];
@@ -727,14 +733,15 @@ dropdown.addEventListener('change', () => {
   updateDeleteButton();
 });
 
+// reset button - clear all fields
 resetBtn.addEventListener('click', () => {
   if (confirm('This will clear all fields. Continue?')) {
     clearData();
-    // Keep currentSheetName because you might want to overwrite it
     updateDeleteButton();
   }
 });
 
+// delete button - deletes a selected sheet
 deleteBtn.addEventListener('click', () => {
   if (!currentSheetName) {
     alert('Please select a sheet to delete.');
@@ -754,8 +761,8 @@ deleteBtn.addEventListener('click', () => {
   }
 });
 
+// page open/refresh behavior
 const darkClass = 'dark-mode';
-
 window.addEventListener('DOMContentLoaded', () => {
   updateDropdown();
   updateDeleteButton();
@@ -766,9 +773,28 @@ window.addEventListener('DOMContentLoaded', () => {
 }
 });
 
+// dark mode functionality - toggle on click
 const toggle = document.getElementById('dark-mode');
-
 toggle.addEventListener('click', () => {
   const isDark = document.body.classList.toggle(darkClass);
   localStorage.setItem('dark-mode', isDark);
 });
+
+// info-popup functionality - show webpage info/instructions
+// disables scrolling and other user input until closed
+const openPopup = document.getElementById('info');
+const closePopup = document.getElementById('close');
+const popup = document.getElementById('popup');
+const popupOverlay = document.getElementById('popup-overlay');
+
+openPopup.addEventListener('click', () => {
+  popup.classList.add('open-popup');
+  document.body.classList.add('no-scroll');
+  popupOverlay.classList.remove('hidden');
+})
+
+closePopup.addEventListener('click', () => {
+  popup.classList.remove('open-popup');
+  document.body.classList.remove('no-scroll');
+  popupOverlay.classList.add('hidden');
+})

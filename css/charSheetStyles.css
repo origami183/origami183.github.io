@@ -248,6 +248,46 @@ body.dark-mode #death_box, body.dark-mode #speed_box {
     border: white solid;
 }
 
-body.dark-mode a {
-  color: #9ecbff;
+.info-popup {
+  width: 600px;
+  color: #000000;
+  background: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  padding: 0 30px 30px;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 10000;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: #333;
+}
+
+.hidden {
+  display: none;
+}
+
+#popup {
+  li {
+    text-align: left;
+  }
+  text-align: center;
+}
+
+.open-popup{
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
