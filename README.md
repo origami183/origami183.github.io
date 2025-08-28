@@ -12,11 +12,11 @@ How to use:
 - Checkboxes (outside of Death Save/Fails) act as a way to indicate proficiency with an attribute or skill, select the box only if proficiency is applicable.
 	- Note: Skills have a second checkbox for expertise. Again, only use if applicable.
 - Save will save the sheet to local storage after accepting a name to save as.
-- Export downloads the currently selected sheet as a JSON file
-- Import allows the upload of a single JSON file to (should only accept valid sheet files)
-- New Sheet resets all values back to defaults (clear all button, be sure to save anything important)
+- Export downloads the currently selected sheet as a JSON file.
+- Import allows the upload of a single JSON file to (should only accept valid sheet files).
+- New Sheet resets all values back to defaults (clear all button, be sure to save anything important).
 - Delete deletes a sheet saved to local storage.
-- Toggle Dark Mode swaps the page between light & dark mode
+- Toggle Dark Mode swaps the page between light & dark mode.
 
 ---
 Any suggested updates or features should be directed to the issues page on the Github project.
