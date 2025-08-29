@@ -55,39 +55,49 @@
   <!-- main sheet content -->
   <main>
     <div id="basic_info">
-      <p>Name: <input type="text" id="name"/></p>
-      <p>Level: <input type="number" id="LVL"/></p>
-      <p>Class: <input type="text" id="class"/></p>
-      <p>Subclass: <input type="text" id="subclass"/></p>
-      <p>Background: <input type="text" id="background"/></p>
-      <p>Race/Species: <input type="text" id="race"/></p>
-      <p>Alignment: <input type="text" id="alignment"/></p>
+      <div class="row-1">
+        <p>Name: <input type="text" id="name"/></p>
+        <p>Level: <input type="number" id="LVL"/></p>
+        <p>Class: <input type="text" id="class"/></p>
+        <p>Subclass: <input type="text" id="subclass"/></p>
+      </div>
+      <div class="row-2">
+        <p>Background: <input type="text" id="background"/></p>
+        <p>Race/Species: <input type="text" id="race"/></p>
+        <p>Alignment: <input type="text" id="alignment"/></p>
+      </div>
     </div>
 
     <div id="non-attribute_stats">
-      <p>Proficiency: +<span id="Profic">0</span></p>
-      <p>HP: <input type="number" id="hpCur"/> / <input type="number" id="hpMax"/></p>
-      <p>Temp HP: <input type="text" id="hpTemp"/></p>
-      <p>Hit Dice: <input type="number" id="hDiceCur"/> / <input type="number" id="hDiceMax"/></p>
-      <p>Armor Class: <input type="text" id="AC"/></p>
-      <p>Initiative: <input type="text" id="initiative"/></p>
-      <p>Passive Perception: <span id="passivePerc">0</span></p>
-      <section id="death_box">
-        <p>Death Saves:</p>
-        <div>
-          <p>Pass:<input type="checkbox" id="dPass1"/><input type="checkbox" id="dPass2"/><input type="checkbox" id="dPass3"/></p>
-          <p>Fail:<input type="checkbox" id="dFail1"/><input type="checkbox" id="dFail2"/><input type="checkbox" id="dFail3"/></p>
-        </div>
-      </section>
-      <section id="speed_box">
-        <p>Speed:</p>
-        <div id="move_speed">
-          <p>Walking:<input type="text" id="walkSpeed"/></p>
-          <p>Flying:<input type="text" id="flySpeed"/></p>
-          <p>Swimming:<input type="text" id="swimSpeed"/></p>
-          <p>Climbing:<input type="text" id="climbSpeed"/></p>
-        </div>
-      </section>
+      <div class="stat-grid top-row">
+        <p>Proficiency: +<span id="Profic">0</span></p>
+        <p>HP: <input type="number" id="hpCur"/> / <input type="number" id="hpMax"/></p>
+        <p>Temp HP: <input type="text" id="hpTemp"/></p>
+        <p>Hit Dice: <input type="number" id="hDiceCur"/> / <input type="number" id="hDiceMax"/></p>
+      </div>
+      <div class="stat-grid bottom-row">
+        <p>Armor Class: <input type="text" id="AC"/></p>
+        <p>Initiative: <input type="text" id="initiative"/></p>
+        <p>Passive Perception: <span id="passivePerc">0</span></p>
+      </div>
+      <div class="box-row">
+        <section id="death_box">
+          <p>Death Saves:</p>
+          <div>
+            <p>Pass:<input type="checkbox" id="dPass1"/><input type="checkbox" id="dPass2"/><input type="checkbox" id="dPass3"/></p>
+            <p>Fail:<input type="checkbox" id="dFail1"/><input type="checkbox" id="dFail2"/><input type="checkbox" id="dFail3"/></p>
+          </div>
+        </section>
+        <section id="speed_box">
+          <p>Speed:</p>
+          <div id="move_speed">
+            <p>Walking:<input type="text" id="walkSpeed"/></p>
+            <p>Flying:<input type="text" id="flySpeed"/></p>
+            <p>Swimming:<input type="text" id="swimSpeed"/></p>
+            <p>Climbing:<input type="text" id="climbSpeed"/></p>
+          </div>
+        </section>
+      </div>
     </div>
 
     <div id="output-box">
