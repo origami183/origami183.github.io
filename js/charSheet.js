@@ -207,7 +207,7 @@ function updateValues() {
 // Weapon table script content
 const table = document.getElementById('weapon-table').getElementsByTagName('tbody')[0];
 
-  // Event listener on the table body
+// Handle enter and backspace for dynamic row management
 table.addEventListener('keydown', function (e) {
   const target = e.target;
   const row = target.closest('tr');
@@ -239,6 +239,7 @@ table.addEventListener('keydown', function (e) {
   }
 });
 
+// Add a new row to the weapon/attack table
 function addRow() {
   const newRow = table.insertRow();
 
@@ -274,10 +275,13 @@ function addRow() {
 
 const spellContainer = document.getElementById('spells');
 
+// Cantrip table code
+// Handle enter and backspace for dynamic row management
 const cantripsBody = document.getElementById('cantrips-body');
 cantripsBody.addEventListener('keydown', (e) => {
   const row = e.target.closest('tr');
 
+  // Add new row on Enter in last column
   if (e.key === 'Enter' && e.target.classList.contains('last-column')) {
     e.preventDefault();
     const newRow = document.createElement('tr');
@@ -291,6 +295,7 @@ cantripsBody.addEventListener('keydown', (e) => {
     newInput.focus();
   }
 
+  // Delete row on Backspace in first column if row is empty
   if (e.key === 'Backspace' && e.target.classList.contains('first-column')) {
     if (e.target.value.trim() === '') {
       const inputs = row.querySelectorAll('input');
@@ -308,6 +313,7 @@ cantripsBody.addEventListener('keydown', (e) => {
   }
 });
 
+// Spell level name list
 const levelNames = {
   1: "1st Level",
   2: "2nd Level",
@@ -320,7 +326,8 @@ const levelNames = {
   9: "9th Level"
 };
 
-
+// Listener for the secondary spell slot number input
+// Number filled in --> create corresponding spell list table
 document.querySelectorAll('#slots input[type="number"][data-level]').forEach(input => {
     input.addEventListener('input', () => {
       const level = input.dataset.level;
@@ -328,18 +335,42 @@ document.querySelectorAll('#slots input[type="number"][data-level]').forEach(inp
 
       const existingSection = document.querySelector(`#spell-level-${level}`);
 
+      // Handle table addition/removal
       if (value > 0 && !existingSection) {
-        addSpellSection(level);
+        const newSection = addSpellSection(level);
+        insertSpellInOrder(newSection)
       } else if ((value <= 0 || isNaN(value)) && existingSection) {
         existingSection.remove();
       }
     });
   });
 
+  // Insert newly created spell list table in the correct location on the page (spell levels are orderded numerically)
+  function insertSpellInOrder(newSection) {
+    const newLevel = parseInt(newSection.dataset.level, 10);
+
+    const sections = Array.from(spellContainer.querySelectorAll('.spell-section[data-level'));
+
+    // Does the new section get placed before an existing one
+    const beforeNode = sections.find(section => {
+      const sectionLevel = parseInt(section.dataset.level, 10);
+      return sectionLevel > newLevel;
+    });
+
+    // Simple placer
+    if (beforeNode) {
+      spellContainer.insertBefore(newSection, beforeNode);
+    } else {
+      spellContainer.appendChild(newSection);
+    }
+  }
+
+  // Make a new spell list table
   function addSpellSection(level) {
     const section = document.createElement('div');
     section.className = 'spell-section';
     section.id = `spell-level-${level}`;
+    section.dataset.level = level;
 
     const header = document.createElement('h4');
     header.textContent = levelNames[level];
@@ -347,7 +378,7 @@ document.querySelectorAll('#slots input[type="number"][data-level]').forEach(inp
     const table = document.createElement('table');
     const tbody = document.createElement('tbody');
 
-    // Add first row
+    // Add initial row
     const firstRow = document.createElement('tr');
     const cell = document.createElement('td');
     const input = document.createElement('input');
@@ -360,7 +391,6 @@ document.querySelectorAll('#slots input[type="number"][data-level]').forEach(inp
     table.appendChild(tbody);
     section.appendChild(header);
     section.appendChild(table);
-    spellContainer.appendChild(section);
 
     // Handle enter and backspace for dynamic row management
     tbody.addEventListener('keydown', (e) => {
@@ -397,6 +427,8 @@ document.querySelectorAll('#slots input[type="number"][data-level]').forEach(inp
         }
       }
     });
+    
+    return section;
   }
 
 
@@ -458,6 +490,7 @@ document.getElementById('PersProf').addEventListener('input', updateValues);
 document.getElementById('PersExp').addEventListener('input', updateValues);
 
 
+// nav bar related code
 const STORAGE_KEY = 'character_sheets';
 
 const dropdown = document.getElementById('saved-sheets-dropdown');
@@ -470,10 +503,12 @@ const deleteBtn = document.getElementById('delete-btn');
 
 let currentSheetName = '';
 
+// Pull saved sheets from local storage
 function getSavedSheets() {
   return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 }
 
+// Save a sheet
 function saveToCache(name, data) {
   const all = getSavedSheets();
   all[name] = data;
@@ -483,6 +518,7 @@ function saveToCache(name, data) {
   dropdown.value = name;
 }
 
+// Updates dropdown list, called when needed (sheet saved, imported, or deleted, or if page is refreshed)
 function updateDropdown() {
   const all = getSavedSheets();
   dropdown.innerHTML = '<option value="">-- Select Saved Sheet --</option>';
@@ -494,6 +530,7 @@ function updateDropdown() {
   });
 }
 
+// Helper for collecting data for exporting a sheet
 function collectData() {
   const data = {
     fields: {},
@@ -544,6 +581,7 @@ function collectData() {
   return data;
 }
 
+// Helper for filling in fields when importing a sheet from a file
 function populateData(data) {
   // Restore static fields
   if (data.fields) {
@@ -562,7 +600,7 @@ function populateData(data) {
   // Restore weapons table
   if (Array.isArray(data.weapons)) {
     const tbody = document.querySelector('#weapon-table tbody');
-    tbody.innerHTML = ''; // Clear existing rows
+    tbody.innerHTML = '';
 
     data.weapons.forEach(row => {
       const tr = document.createElement('tr');
@@ -632,6 +670,7 @@ function populateData(data) {
   updateValues()
 }
 
+// Delete all data in fields
 function clearData() {
   document.querySelectorAll('input, select, textarea').forEach(el => {
     if (el.type === 'checkbox') {
@@ -641,6 +680,7 @@ function clearData() {
     }
   });
 
+  // Delete and remake Cantrip table, delete other spell tables
   const cantripsBody = document.getElementById('cantrips-body');
   cantripsBody.innerHTML = '';
   const tr = document.createElement('tr');
@@ -662,7 +702,7 @@ function clearData() {
 
 // Button Event Listeners
 
-// save button - save all current fields
+// Save button - save all current fields
 saveBtn.addEventListener('click', () => {
   const name = prompt('Enter a name for this sheet:', currentSheetName || '');
   if (!name) return;
@@ -671,7 +711,7 @@ saveBtn.addEventListener('click', () => {
   alert(`Saved "${name}" to localStorage.`);
 });
 
-// export button - export current fields to JSON file
+// Export button - export current fields to JSON file
 exportBtn.addEventListener('click', () => {
   const data = collectData();
   const filename = (currentSheetName || 'character-sheet') + '.json';
@@ -684,12 +724,12 @@ exportBtn.addEventListener('click', () => {
   URL.revokeObjectURL(url);
 });
 
-// import button - import data to fields/sheet from JSON file
+// Import button - import data to fields/sheet from JSON file
 importBtn.addEventListener('click', () => {
   importFile.click();
 });
 
-// helper for import - actually handle file upload
+// Helper for import - actually handle file upload
 importFile.addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -711,12 +751,12 @@ importFile.addEventListener('change', (e) => {
   reader.readAsText(file);
 });
 
-// disables delete button if sheet is unnamed
+// Disables delete button if sheet is unnamed
 function updateDeleteButton() {
   deleteBtn.disabled = !currentSheetName;
 }
 
-// sheet selector updater
+// Sheet selector updater
 dropdown.addEventListener('change', () => {
   const name = dropdown.value;
   if (!name) {
@@ -733,15 +773,25 @@ dropdown.addEventListener('change', () => {
   updateDeleteButton();
 });
 
-// reset button - clear all fields
+// Reset button - clear all fields
+// Does allow a chance to save user content before data clearing
 resetBtn.addEventListener('click', () => {
   if (confirm('This will clear all fields. Continue?')) {
+    if (confirm('Would you like to save the current content first?')) {
+      const name = prompt('Enter a name for this sheet:', currentSheetName || '');
+      if (!name) return;
+      const data = collectData();
+      saveToCache(name, data);
+      alert(`Saved "${name}" to localStorage.`);
+    }
+
     clearData();
     updateDeleteButton();
   }
 });
 
-// delete button - deletes a selected sheet
+// Delete button - deletes a selected sheet
+// Ensures user has a chance to decline deletion
 deleteBtn.addEventListener('click', () => {
   if (!currentSheetName) {
     alert('Please select a sheet to delete.');
@@ -761,7 +811,7 @@ deleteBtn.addEventListener('click', () => {
   }
 });
 
-// page open/refresh behavior
+// Page open/refresh behavior
 const darkClass = 'dark-mode';
 window.addEventListener('DOMContentLoaded', () => {
   updateDropdown();
@@ -769,19 +819,19 @@ window.addEventListener('DOMContentLoaded', () => {
   updateValues();
 
   if (localStorage.getItem('dark-mode') === 'true') {
-  document.body.classList.add(darkClass);
-}
+    document.body.classList.add(darkClass);
+  }
 });
 
-// dark mode functionality - toggle on click
+// Dark mode functionality - toggle on click
 const toggle = document.getElementById('dark-mode');
 toggle.addEventListener('click', () => {
   const isDark = document.body.classList.toggle(darkClass);
   localStorage.setItem('dark-mode', isDark);
 });
 
-// info-popup functionality - show webpage info/instructions
-// disables scrolling and other user input until closed
+// Info-popup functionality - show webpage info/instructions
+// Disables scrolling and other user input until closed, through class manipulation
 const openPopup = document.getElementById('info');
 const closePopup = document.getElementById('close');
 const popup = document.getElementById('popup');

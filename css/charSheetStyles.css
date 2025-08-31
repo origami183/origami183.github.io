@@ -42,19 +42,24 @@ header {
 main {
   margin-top: 75px;
 
+  strong {
+    font-size: larger;
+  }
+
+  #stats {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+
   #stats tr td {
       text-align: center;
-      padding-right: 8vw;
-      padding-top: 1vh;
+      padding: 1vh 2vw;
       font-size: medium;
   }
 
   #stats tr input[type="checkbox"] {
     margin-top: 0;
-  }
-
-  strong {
-    font-size: larger;
   }
 
   #stats tr {
@@ -63,7 +68,7 @@ main {
   }
 
   #stats tr th {
-    padding-right: 8vw;
+    padding: 1vh 2vw;
   }
 
   #basic_info {
@@ -177,6 +182,7 @@ main {
   #output-box {
       margin-top: 20px;
       font-size: 20px;
+      text-align: center;
   }
 
   textarea {
