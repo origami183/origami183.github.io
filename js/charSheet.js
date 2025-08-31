@@ -787,6 +787,7 @@ resetBtn.addEventListener('click', () => {
 
     clearData();
     updateDeleteButton();
+    updateValues();
   }
 });
 
